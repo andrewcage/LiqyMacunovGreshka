@@ -12,6 +12,7 @@ function setup() {
     let grassCountElement = document.getElementById('grassCount');
     let grassEaterCountElement = document.getElementById('grassEaterCount');
     let predatorCountElement = document.getElementById('predatorCount');
+    let smugglerCountElement = document.getElementById('smugglerCount');
 
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
