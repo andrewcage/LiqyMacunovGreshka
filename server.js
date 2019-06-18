@@ -79,32 +79,74 @@ function creatingObjects() {
             if (matrix[y][x] == 2) {
                 var grassEater = new GrassEater(x, y);
                 grassEaterArr.push(grassEater);
+                herbCounter++;
             }
             else if (matrix[y][x] == 3) {
                 var pred = new Predator(x, y);
                 predArr.push(pred);
+                predCounter++;
             } 
             else if (matrix[y][x] == 4) {
                 var smug = new Smuggler(x, y);
                 smugArr.push(smug);
+                huntCounter++;
             } 
             else if (matrix[y][x] == 1) {
                 var grass = new Grass(x, y);
                 grassArr.push(grass);
-                xotHashiv++;
+                khotCounter++;
             }
 
         }
     }
 }
+
+    var season = 0
+    weatheris = "Winter"
+
+    function changeweather(){
+        season++
+        if(season <= 6) {
+            weatheris = "Winter"
+        }
+        else if(season <= 12) {
+            weatheris = "Spring"
+        }
+        else if(season <= 18) {
+            weatheris = "Summer"
+        }
+        else if(season <= 24) {
+            weatheris = "Autumn"
+        }
+        else {
+            season = 0
+        }
+        console.log(season, weatheris, sendData)
+    }
+
+    let sendData = {
+        matrix: matrix,
+        weather: weatheris,
+        grassCounter: khotCounter,
+        grassEaterCounter: herbCounter,
+        predatorCounter: predCounter,
+        smugglerCounter: huntCounter
+    }
+    
     creatingObjects();
 
     function game() {
-        if (grassArr[0] !== undefined) {
-            for (var i in grassArr) {
-                grassArr[i].mul();
+        
+        changeweather();
+        io.sockets.emit("data", sendData);
+
+        if (season !== "Winter"){
+            if (grassArr[0] !== undefined) {
+                for (var i in grassArr) {
+                    grassArr[i].mul();
+                }
             }
-        }
+        }       
         else if (grassEaterArr[0] !== undefined) {
             for (var i in grassEaterArr) {
                 grassEaterArr[i].move();
@@ -121,15 +163,6 @@ function creatingObjects() {
                 predArr[i].die()
             }
         }
-
-        //! Object to send
-        let sendData = {
-            matrix: matrix,
-            grassCounter: xotHashiv
-        }
-
-        //! Send data over the socket to clients who listens "data"
-        io.sockets.emit("data", sendData);
     }
 
     setInterval(game, 1000)
