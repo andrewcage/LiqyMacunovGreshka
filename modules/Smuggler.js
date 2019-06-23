@@ -48,14 +48,14 @@ module.exports = class Smuggler extends LivingCreature {
         ];
     }
 
-    chooseCellShoot(character) {
+    chooseCellShoot(ch) {
         this.getNewCoordinatesShoot();
-        return super.chooseCell(character);
+        return super.chooseCell(ch);
     }
 
-    chooseCellMove(character) {
+    chooseCellMove(ch) {
         this.getNewCoordinatesMove();
-        return super.chooseCell(character);
+        return super.chooseCell(ch);
     }
 
 
@@ -87,7 +87,7 @@ module.exports = class Smuggler extends LivingCreature {
             this.x = newX2;
         }
 
-        this.energy -= 1;
+        this.energy -= 2;
 
     }
 
@@ -120,7 +120,7 @@ module.exports = class Smuggler extends LivingCreature {
                     break;
                 }
             }
-            this.energy += 1;
+            this.energy += 2;
         }
     }
 

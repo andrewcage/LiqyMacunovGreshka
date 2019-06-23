@@ -39,14 +39,14 @@ function setup() {
                     if(weather == "Winter"){
                         fill("white");
                     }
-                    else if(weather == "Winter"){
-                        fill("white");
+                    else if(weather == "Spring"){
+                        fill("green");
+                    }
+                    else if(weather == "Summer"){
+                        fill("green");
                     }
                     else if(weather == "Winter"){
-                        fill("white");
-                    }
-                    else if(weather == "Winter"){
-                        fill("white");
+                        fill("orange");
                     }
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 2) {
@@ -61,6 +61,38 @@ function setup() {
                 } else if (matrix[i][j] == 4) {
                     fill('purple');
                     rect(j * side, i * side, side, side);
+                }
+                if (data.weather == 1) {
+                    // console.log("garun")
+                    document.body.style.backgroundColor = "green";
+                    if (matrix[i][j] == 1) {
+                        fill("#66ff66");
+                        rect(j * side, i * side, side, side);
+                    }
+                }
+                if (data.weather == 2) {
+                    // console.log("amar")
+                    document.body.style.backgroundColor = "yellow";
+                    if (matrix[i][j] == 1) {
+                        fill("#ffbf80");
+                        rect(j * side, i * side, side, side);
+                    }
+                }
+                if (data.weather == 3) {
+                    // console.log("ashun")
+                    document.body.style.backgroundColor = "cccc00";
+                    if (matrix[i][j] == 1) {
+                        fill("green");
+                        rect(j * side, i * side, side, side);
+                    }
+                }
+                if (data.weather == 4) {
+                    // console.log("dzmer")
+                    document.body.style.backgroundColor = "00cccc";
+                    if (matrix[i][j] == 1) {
+                        fill("#757557");
+                        rect(j * side, i * side, side, side);
+                    }
                 }
             }
         }

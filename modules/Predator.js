@@ -18,9 +18,9 @@ module.exports = class Predator extends LivingCreature {
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(character) {
+    chooseCell(ch) {
         this.getNewCoordinates();
-        return super.chooseCell(character);
+        return super.chooseCell(ch);
     }
     move() {
 
@@ -50,7 +50,7 @@ module.exports = class Predator extends LivingCreature {
             this.x = newX2;
         }
 
-        this.energy -= 1;
+        this.energy -= 2;
     }
     eat() {
 
@@ -74,7 +74,7 @@ module.exports = class Predator extends LivingCreature {
 
             this.y = newY;
             this.x = newX;
-            this.energy += 1;
+            this.energy += 3;
 
         }
     }
@@ -82,7 +82,7 @@ module.exports = class Predator extends LivingCreature {
 
         var newCell = random(this.chooseCell(0));
 
-        if (this.energy >= 15 && newCell) {
+        if (this.energy >= 12 && newCell) {
             var newPredator = new Predator(newCell[0], newCell[1], this.index);
             predatorArr.push(newPredator);
             matrix[newCell[1]][newCell[0]] = this.index;

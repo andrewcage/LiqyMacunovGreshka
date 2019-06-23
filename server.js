@@ -1,6 +1,5 @@
 
 //! Requiring modules  --  START
-var LivingCreature = require("./modules/LivingCreature.js")
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
 var Predator = require("./modules/Predator.js")
@@ -14,7 +13,9 @@ grassArr = [];
 grassEaterArr = [];
 predArr = [];
 smugArr = [];
+
 matrix = [];
+
 khotCounter = 0;
 herbCounter = 0;
 predCounter = 0;
@@ -54,7 +55,7 @@ function matrixGenerator(matrixSize, grass, grassEater, pred, smug) {
         matrix[customY][customX] = 4;
     }
 }
-matrixGenerator(20, 100, 36, 20, 27);
+matrixGenerator(20, 40, 36, 20, 27);
 //! Creating MATRIX -- END
 
 
@@ -96,51 +97,15 @@ function creatingObjects() {
                 grassArr.push(grass);
                 khotCounter++;
             }
-
         }
     }
 }
-
-    var season = 0
-    weatheris = "Winter"
-
-    function changeweather(){
-        season++
-        if(season <= 6) {
-            weatheris = "Winter"
-        }
-        else if(season <= 12) {
-            weatheris = "Spring"
-        }
-        else if(season <= 18) {
-            weatheris = "Summer"
-        }
-        else if(season <= 24) {
-            weatheris = "Autumn"
-        }
-        else {
-            season = 0
-        }
-        console.log(season, weatheris, sendData)
-    }
-
-    let sendData = {
-        matrix: matrix,
-        weather: weatheris,
-        grassCounter: khotCounter,
-        grassEaterCounter: herbCounter,
-        predatorCounter: predCounter,
-        smugglerCounter: huntCounter
-    }
     
     creatingObjects();
 
     function game() {
-        
-        changeweather();
-        io.sockets.emit("data", sendData);
 
-        if (season !== "Winter"){
+        if (weather !== 4){
             if (grassArr[0] !== undefined) {
                 for (var i in grassArr) {
                     grassArr[i].mul();
@@ -149,20 +114,29 @@ function creatingObjects() {
         }       
         else if (grassEaterArr[0] !== undefined) {
             for (var i in grassEaterArr) {
-                grassEaterArr[i].move();
                 grassEaterArr[i].eat();
-                grassEaterArr[i].mul();
-                grassEaterArr[i].die();
             }
         }
         else if (predArr[0] !== undefined) {
             for(var i in predArr) {
-                predArr[i].move()
                 predArr[i].eat()
-                predArr[i].mul()
-                predArr[i].die()
             }
         }
+        else if (smugArr[0] !== undefined) {
+            for(var i in smugArr) {
+                smugArr[i].shoot()
+            }
+        }
+        let sendData = {
+            matrix: matrix,
+            weather: weatheris,
+            grassCounter: khotCounter,
+            grassEaterCounter: herbCounter,
+            predatorCounter: predCounter,
+            smugglerCounter: huntCounter
+        }
+
+        io.sockets.emit("data", sendData);
     }
 
     setInterval(game, 1000)
