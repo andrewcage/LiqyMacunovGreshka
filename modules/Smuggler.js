@@ -2,9 +2,10 @@ var LivingCreature = require("./LivingCreature.js")
 var random = require("./random.js")
 
 module.exports = class Smuggler extends LivingCreature {
-    constructor(x, y, index) {
-        super(x, y, index)
-        this.energy = 15
+    constructor(x, y) {
+        super(x, y)
+        this.energy = 16
+        this.index = 4
     }
     getNewCoordinatesShoot() {
         this.directionsShoot = [
@@ -60,7 +61,7 @@ module.exports = class Smuggler extends LivingCreature {
 
 
     move() {
-
+        this.energy--;
         var newCell = random(this.chooseCellMove(0));
         var newCell2 = random(this.chooseCellMove(1));
 
@@ -87,7 +88,9 @@ module.exports = class Smuggler extends LivingCreature {
             this.x = newX2;
         }
 
-        this.energy -= 2;
+        if (this.energy < 0) {
+            this.leave()
+        }
 
     }
 
@@ -100,10 +103,9 @@ module.exports = class Smuggler extends LivingCreature {
         var newCell = random(newCell3)
 
         if (newCell) {
-            var newX = newCell[0];
-            var newY = newCell[1];
+            let newX = newCell[0];
+            let newY = newCell[1];
 
-            matrix[this.y][this.x] = this.index;
             matrix[newY][newX] = 0;
 
 
@@ -114,24 +116,25 @@ module.exports = class Smuggler extends LivingCreature {
                 }
             }
 
-            for (var i in predatorArr) {
-                if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
-                    predatorArr.splice(i, 1)
+            for (var i in predArr) {
+                if (newX == predArr[i].x && newY == predArr[i].y) {
+                    predArr.splice(i, 1)
                     break;
                 }
             }
             this.energy += 2;
         }
+        else {
+            this.move()
+        }
     }
 
     leave() {
+        matrix[this.y][this.x] = 0;
 
-        if (this.energy <= 0) {
-            matrix[this.y][this.x] = 0;
-            for (var i in smugglerArr) {
-                if (this.x == smugglerArr[i].x && this.y == smugglerArr[i].y) {
-                    smugglerArr.splice(i, 1)
-                }
+        for (var i in smugArr) {
+            if (this.x == smugArr[i].x && this.y == smugArr[i].y) {
+                smugArr.splice(i, 1)
             }
         }
     }

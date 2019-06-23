@@ -7,26 +7,42 @@ function setup() {
     var side = 30;
 
     var matrix = [];
+    
 
     //! Getting DOM objects (HTML elements)
     let grassCountElement = document.getElementById('grassCount');
     let grassEaterCountElement = document.getElementById('grassEaterCount');
     let predatorCountElement = document.getElementById('predatorCount');
     let smugglerCountElement = document.getElementById('smugglerCount');
+    let seasonElement = document.getElementById('season');
 
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
-    socket.on("data", drawCreatures);
+    socket.on("data", drawCreatures, "season");
 
     function drawCreatures(data) {
         //! after getting data pass it to matrix variable
         matrix = data.matrix;
         weather = data.weather;
+        var seasonText;
+        if(weather == 1){
+            seasonText = "Գարուն"
+        }
+        else if(weather == 2){
+            seasonText = "Ամառ"
+        }
+        else if(weather == 3){
+            seasonText = "Աշուն"
+        }
+        else if(weather == 4){
+            seasonText = "Ձմեռ"
+        }
         grassCountElement.innerText = data.grassCounter;
         grassEaterCountElement.innerText = data.grassEaterCounter;
         predatorCountElement.innerText = data.predatorCounter;
         smugglerCountElement.innerText = data.smugglerCounter;
-        //! Every time it creates new Canvas with new matrix size
+        seasonElement.innerText = seasonText;
+        //! Every time it creates new Canvas woth new matrix size
         createCanvas(matrix[0].length * side, matrix.length * side)
         //! clearing background by setting it to new grey color
         background('#acacac');
@@ -36,18 +52,7 @@ function setup() {
         for (var i = 0; i < matrix.length; i++) {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
-                    if(weather == "Winter"){
-                        fill("white");
-                    }
-                    else if(weather == "Spring"){
-                        fill("green");
-                    }
-                    else if(weather == "Summer"){
-                        fill("green");
-                    }
-                    else if(weather == "Winter"){
-                        fill("orange");
-                    }
+                    fill("green");
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 2) {
                     fill("yellow");
@@ -62,35 +67,31 @@ function setup() {
                     fill('purple');
                     rect(j * side, i * side, side, side);
                 }
-                if (data.weather == 1) {
-                    // console.log("garun")
+                if (weather == 1) {
                     document.body.style.backgroundColor = "green";
                     if (matrix[i][j] == 1) {
                         fill("#66ff66");
                         rect(j * side, i * side, side, side);
                     }
                 }
-                if (data.weather == 2) {
-                    // console.log("amar")
-                    document.body.style.backgroundColor = "yellow";
-                    if (matrix[i][j] == 1) {
-                        fill("#ffbf80");
-                        rect(j * side, i * side, side, side);
-                    }
-                }
-                if (data.weather == 3) {
-                    // console.log("ashun")
-                    document.body.style.backgroundColor = "cccc00";
+                if (weather == 2) {                   
+                    document.body.style.backgroundColor = "yellowgreen";
                     if (matrix[i][j] == 1) {
                         fill("green");
                         rect(j * side, i * side, side, side);
                     }
                 }
-                if (data.weather == 4) {
-                    // console.log("dzmer")
+                if (weather == 3) {                   
+                    document.body.style.backgroundColor = "cccc00";
+                    if (matrix[i][j] == 1) {
+                        fill("orange");
+                        rect(j * side, i * side, side, side);
+                    }
+                }
+                if (weather == 4) {                   
                     document.body.style.backgroundColor = "00cccc";
                     if (matrix[i][j] == 1) {
-                        fill("#757557");
+                        fill("white");
                         rect(j * side, i * side, side, side);
                     }
                 }
@@ -98,3 +99,4 @@ function setup() {
         }
     }
 }
+

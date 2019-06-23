@@ -2,8 +2,8 @@
 
 <head>
     <meta charset="utf8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         canvas {
             display: block;
@@ -23,7 +23,6 @@
             font-family: 'Noto Sans', sans-serif !important;
         }
     </style>
-    </style>
 </head>
 
 <body>
@@ -36,6 +35,9 @@
                 <h1>Անդրանիկ Կարապետյան</h1>
             </tr>
             <tr>
+                <h1 id="season">  </h1>
+            </tr>
+            <tr>
                 <th scope="col">#</th>
                 <th scope="col">Գույն</th>
                 <th scope="col">Նկարագրություն</th>
@@ -46,29 +48,27 @@
             <tr>
                 <th scope="row">1</th>
                 <td scope="row" style="background-color:green;"></td>
-                <td>Կանաչը խոտն է, որը բազմանում է 4 ցիկլը մեկ, մահանում է, երբ նրան ուտում է խոտակերը կամ նրան կոխկրտում է գիշատիչը կամ որսորդը</td>
+                <td>Կանաչը խոտն է, որը բազմանում է 4 ցիկլը մեկ,մահանում է երբ նրան ուտում է խոտակերը կամ նրան կոխկրտում է գիշատիչը կամ որսորդը</td>
                 <td id="grassCount"></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
                 <td scope="row" style="background-color:yellow;"></td>
-                <td>Դեղինը խոտակերն է, որը բազմանում է 6 հատ խոտ ուտելուց հետո և մահանում է 8 ցիկլ չուտելու դեպքում կամ
-                    երբ նրան ուտում է գիշատիչը կամ սպանում է որսորդը:</td>
+                <td>Դեղինը խոտակերն է, որը բազմանում է 3 հատ խոտ ուտելուց հետո և մահանում է 10 ցիկլ չուտելու դեպքում կամ
+                    երբ նրան ուտում է գիշատիչը կամ երբ նրան սպանում է որսորդը:</td>
                 <td id="grassEaterCount"></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
                 <td scope="row" style="background-color:red;"></td>
-                <td>Կարմիրը գիշատիչն է, որը բազմանում է 5 հատ խոտակեր ուտելուց հետո և մահանում է 10 ցիկլ չուտելու դեպքում
-                    կամ երբ նրան սպանում է որսորդը:</td>
+                <td>Կարմիրը գիշատիչն է, որը բազմանում է 2 հատ խոտակեր ուտելուց հետո, մահանում է 13 ցիկլ չուտելու դեպքում կամ երբ նրան սպանում է որսորդը</td>
                 <td id="predatorCount"></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td scope="row" style="background-color:purple;"></td>
-                <td>Մանուշակագույնը որսորդն է, որը սպանում է խոտակերներին ու գիշատիչներին և կհեռանա
-                    դաշտից 15 ցիկլ չսպանելու դեպքում:</td>
-                <td id="smugglerCount"></td>
+                <tr>
+                    <th scope="row">4</th>
+                    <td scope="row" style="background-color:purple;"></td>
+                    <td>Մանուշակագույնը որսորդն է, որը սպանում է խոտակերներին ու գիշատիչներին, կհեռանա 16 ցիկլ չսպանելու դեպքում</td>
+                    <td id="smugglerCount"></td>
+                </tr>
             </tr>
         </tbody>
     </table>
